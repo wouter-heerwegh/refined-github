@@ -10,7 +10,7 @@ function addButton(topics: Array<string>): void {
 		return
 	}
 
-	let button = <details className="details-reset details-overlay position-relative mt-1 mt-lg-0 ml-1" id="topic-options">
+	let button = <details className="details-reset details-overlay position-relative mt-1 mt-lg-0 mr-md-2 ml-md-2" id="topic-options">
 		<summary aria-haspopup="menu" data-view-component="true" className="btn" role="button">
 			<span>Topic</span>
 			<span className='dropdown-caret'/>
@@ -26,19 +26,27 @@ function addButton(topics: Array<string>): void {
 					</button>
 				</header>
 				<div className='SelectMenu-list'>
-					<label className="SelectMenu-item" role="menuitemradio" tab-index="0" aria-checked="false">
-						<input type="radio" name="topic" id="topic_" data-autosubmit="true" onClick={() => {
+					<label className="SelectMenu-item" role="menuitemradio" tab-index="0" aria-checked="true">
+						<input type="radio" name="topic" id="topic_" hidden={true} data-autosubmit="true" checked={true} onClick={(event) => {
+							event.currentTarget.setAttribute("checked", "true")
 							clearSearch()
 							}}/>
+							<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" className="octicon octicon-check SelectMenu-icon SelectMenu-icon--check">
+								<path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path>
+							</svg>
 						<span>None</span>
 					</label>
 					{
 						topics.map((topic) => {
 							return (<label className="SelectMenu-item" role="menuitemradio" tab-index="0" aria-checked="false">
-								<input type="radio" name="topic" id="topic_" data-autosubmit="true" onClick={() => {
+								<input type="radio" name="topic" id="topic_" hidden={true} data-autosubmit="true" onClick={(event) => {
 									console.log("Selected " + topic)
+									event.currentTarget.setAttribute("checked", "true")
 									checkSearch(topic)
 									}}/>
+								<svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" className="octicon octicon-check SelectMenu-icon SelectMenu-icon--check">
+									<path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path>
+								</svg>
 								<span>{topic}</span>
 							</label>)
 						})
@@ -47,8 +55,14 @@ function addButton(topics: Array<string>): void {
 			</div>
 		</details-menu>
 	</details>
-
-type_button.append(button)
+	
+	let sort_button = document.getElementById("sort-options")
+	console.log(sort_button)
+	if(sort_button == null){
+		return
+	}
+	console.log(type_button)
+	type_button.insertBefore(button, sort_button)
 }
 
 function clearSearch(): void {
