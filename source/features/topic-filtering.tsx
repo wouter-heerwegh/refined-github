@@ -52,8 +52,9 @@ type_button.append(button)
 }
 
 function clearSearch(): void {
-	const searchbar = document.getElementById("your-repos-filter") as HTMLInputElement | null;
-	console.log("Commit info: ", searchbar)
+	const searchbar = document.getElementById("your-repos-filter") as HTMLInputElement;
+	console.log(searchbar)
+	
 	if(searchbar == null){
 		return
 	}
@@ -72,23 +73,56 @@ function clearSearch(): void {
 
 		// reconstruct string
 		args.map((arg) => {
-			search_string += " " + arg
+			if(search_string != ""){
+				search_string += " "
+			}
+			search_string += arg
 		})
 	}
-	searchbar?.setAttribute("value", search_string)
 	
+	searchbar.value = search_string.trim()
 	var event = new Event('input', {
-		bubbles: true,
-		cancelable: true,
+		bubbles: true
 	});
 	
-	searchbar?.dispatchEvent(event)
+	searchbar.dispatchEvent(event)
 }
 
 function checkSearch(topic: string): void {
 	const searchbar = document.getElementById("your-repos-filter") as HTMLInputElement | null;
-	console.log("Commit info: ", searchbar)
-	searchbar?.setAttribute("value", "topic:" + topic)
+	
+	if(searchbar == null){
+		return
+	}
+	
+	let curr_value = searchbar?.value
+	
+	let search_string = ""
+	if(curr_value?.includes("topic:")){
+		let args = curr_value.split(' ')
+		let delete_index = 0
+		for (; delete_index < args.length; delete_index++) {
+			if(args[delete_index].includes("topic:")){
+				break
+			}
+		}
+
+		delete args[delete_index]
+
+		// reconstruct string
+		args.map((arg) => {
+			if(search_string != ""){
+				search_string += " "
+			}
+			search_string += arg
+		})
+	} else {
+		search_string = curr_value
+	}
+	
+	search_string += " topic:" + topic
+
+	searchbar.value = search_string
 	
 	var event = new Event('input', {
 		bubbles: true,
@@ -138,6 +172,14 @@ async function getTopics(org : String): Promise<Set<string>> {
 }
 
 function init(): void {
+	var d = Node.prototype.dispatchEvent;
+	Node.prototype.dispatchEvent = function (...a) {
+		console.log(...a);
+		// debugger; // Uncomment when necessary
+		d.apply(this, a);
+		return true
+	}
+	
 	const org = location.pathname.split('/')[1]
 	
 	getTopics(org).then((topics: Set<string>) => {
