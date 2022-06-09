@@ -1,4 +1,0 @@
-/* Hide unnecessary comment toolbar items */
-.rgh-clean-rich-text-editor :is(md-mention, md-ref, md-header, md-bold, md-italic) {
-	display: none !important; /* Has to override `.d-inline-block` */
-}

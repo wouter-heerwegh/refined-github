@@ -1,8 +1,8 @@
 {
-	"name": "Refined GitHub",
-	"version": "0.0.0",
-	"description": "Simplifies the GitHub interface and adds useful features",
-	"homepage_url": "https://github.com/refined-github/refined-github",
+	"name": "Topic filtering",
+	"version": "2.0.0",
+	"description": "Adds the ability to properly use topics with buttons",
+	"homepage_url": "https://github.com/wouter-heerwegh/refined-github",
 	"manifest_version": 2,
 	"minimum_chrome_version": "88",
 	"applications": {

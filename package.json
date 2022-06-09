@@ -137,7 +137,7 @@
 			"firefoxProfile": "./test/web-ext-profile",
 			"chromiumProfile": "./test/web-ext-profile",
 			"startUrl": [
-				"https://github.com/refined-github/refined-github/issues"
+				"https://github.com/wouter-heerwegh/refined-github/issues"
 			]
 		}
 	}
