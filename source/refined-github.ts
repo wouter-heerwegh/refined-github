@@ -7,3 +7,4 @@ import './refined-github.css';
 
 // CSS-only disableable features
 import './features/topic-filtering';
+import './features/topic-suggestions';
