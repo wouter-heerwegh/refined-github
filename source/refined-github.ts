@@ -216,3 +216,4 @@ import './features/link-to-compare-diff';
 import './features/hide-low-quality-comments';
 import './features/submission-via-ctrl-enter-everywhere';
 import './features/topic-filtering';
+import './features/topic-suggestions';
